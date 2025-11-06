@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC y Bienestar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #70e1f5, #ffd194);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 14px 28px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        #resultado {
+            margin-top: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #27ae60;
+        }
+
+        /* Estilos para la ventana modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 5px;
+            color: #aaa;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        /* Estilos para consejos personalizados */
+        #consejosTextoModal {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #444;
+            text-align: left;
+        }
+
+        /* Media query para pantallas más pequeñas */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            input[type="number"],
+            button {
+                font-size: 1em;
+            }
+
+            #resultado {
+                font-size: 1.1em;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+            }
+        }
+
+        /* Estilos para la barra de IMC */
+        .imc-bar-container {
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .imc-bar {
+            height: 100%;
+            width: 0;
+            /* Inicialmente vacía */
+            background: linear-gradient(to right, #fdd835, #90ee90, #90ee90, #ff7043);
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+            position: relative;
+        }
+
+        .imc-bar-pointer {
+            position: absolute;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 15px solid #333;
+            /* La posición se ajustará con JavaScript */
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Calculadora de IMC y Bienestar</h1>
+
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ej: 70">
+
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" placeholder="Ej: 1.75">
+
+        <button onclick="calcularIMC()">Calcular IMC</button>
+
+        <div id="resultado"></div>
+
+        <!-- Barra de IMC -->
+        <div class="imc-bar-container">
+            <div class="imc-bar" id="imcBar">
+                <div class="imc-bar-pointer" id="imcPointer"></div>
+            </div>
+        </div>
+
+        <!-- Ventana modal -->
+        <div id="consejosModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal()">&times;</span>
+                <h2>Consejos de Salud</h2>
+                <p id="consejosTextoModal"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calcularIMC() {
+            let peso = document.getElementById("peso").value;
+            let altura = document.getElementById("altura").value;
+
+            if (peso === "" || altura === "") {
+                mostrarResultado("Por favor, introduce peso y altura.", "#e74c3c");
+                return;
+            }
+
+            peso = parseFloat(peso);
+            altura = parseFloat(altura);
+
+            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+                mostrarResultado("Por favor, introduce valores numéricos positivos.", "#e74c3c");
+                return;
+            }
+
+            let imc = peso / (altura * altura);
+            imc = imc.toFixed(2);
+
+            let interpretacion = "";
+            let consejos = "";
+
+                        if (imc < 18.5) {
+                            interpretacion = "Bajo peso";
+                            consejos = "Incluye alimentos ricos en nutrientes y consulta a un profesional de la salud.";
+                        } else if (imc < 24.9) {
+                            interpretacion = "Peso normal";
+                            consejos = "¡Buen trabajo! Mantén hábitos saludables y actividad física regular.";
+                        } else if (imc < 29.9) {
+                            interpretacion = "Sobrepeso";
+                            consejos = "Reduce el consumo de azúcares y grasas, y aumenta tu actividad física.";
+                        } else {
+                            interpretacion = "Obesidad";
+                            consejos = "Consulta a un profesional de la salud para un plan personalizado.";
+                        }
+            
+                        mostrarResultado(`Tu IMC es <strong>${imc}</strong> (${interpretacion})`, "#27ae60");
+                        actualizarBarraIMC(imc);
+                        mostrarConsejosModal(consejos);
+                    }
+            
+                    function mostrarResultado(mensaje, color) {
+                        const resultado = document.getElementById("resultado");
+                        resultado.innerHTML = mensaje;
+                        resultado.style.color = color;
+                    }
+            
+                    function actualizarBarraIMC(imc) {
+                        const bar = document.getElementById("imcBar");
+                        const pointer = document.getElementById("imcPointer");
+                        // IMC range: 10 (min) to 40 (max) for visualization
+                        let minIMC = 10;
+                        let maxIMC = 40;
+                        let percent = ((imc - minIMC) / (maxIMC - minIMC)) * 100;
+                        percent = Math.max(0, Math.min(100, percent));
+                        bar.style.width = "100%";
+                        pointer.style.left = `calc(${percent}% - 10px)`;
+                    }
+            
+                    function mostrarConsejosModal(consejos) {
+                        document.getElementById("consejosTextoModal").innerText = consejos;
+                        document.getElementById("consejosModal").style.display = "block";
+                    }
+            
+                    function cerrarModal() {
+                        document.getElementById("consejosModal").style.display = "none";
+                    }
+                </script>
+            </body>
+            </html>
