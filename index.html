@@ -25,65 +25,69 @@
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            padding: 50px;
             width: 100%;
-            max-width: 600px;
+            max-width: 650px;
             text-align: center;
         }
 
         h1 {
             color: #2c3e50;
-            margin-bottom: 25px;
-            font-weight: 600;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 2.2em;
         }
 
         label {
             display: block;
-            margin-top: 20px;
-            font-size: 1.1em;
+            margin-top: 25px;
+            font-size: 1.2em;
             color: #555;
+            font-weight: 500;
         }
 
         input[type="number"] {
             width: 100%;
-            padding: 12px;
-            margin-top: 8px;
+            padding: 15px;
+            margin-top: 10px;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 10px;
             box-sizing: border-box;
-            font-size: 1em;
+            font-size: 1.1em;
             transition: border-color 0.3s ease;
         }
 
         input[type="number"]:focus {
             border-color: #3498db;
             outline: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         button {
             background-color: #3498db;
             color: white;
-            padding: 14px 28px;
-            margin-top: 30px;
+            padding: 16px 32px;
+            margin-top: 35px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button:hover {
             background-color: #2980b9;
+            transform: translateY(-2px);
         }
 
         #resultado {
-            margin-top: 30px;
-            font-size: 1.2em;
-            font-weight: 600;
+            margin-top: 35px;
+            font-size: 1.3em;
+            font-weight: 700;
             color: #27ae60;
         }
 
@@ -97,29 +101,33 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Fondo más oscuro */
         }
 
         .modal-content {
             background-color: #fefefe;
-            margin: 10% auto;
-            padding: 30px;
+            margin: 15% auto;
+            /* Ajuste de margen */
+            padding: 40px;
             border: 1px solid #888;
-            border-radius: 12px;
-            width: 80%;
-            max-width: 500px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            width: 85%;
+            /* Mayor ancho */
+            max-width: 550px;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.35);
             position: relative;
         }
 
         .close {
             position: absolute;
-            right: 15px;
-            top: 5px;
+            right: 20px;
+            top: 10px;
             color: #aaa;
-            font-size: 30px;
+            font-size: 35px;
             font-weight: bold;
             cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .close:hover,
@@ -130,8 +138,8 @@
 
         /* Estilos para consejos personalizados */
         #consejosTextoModal {
-            font-size: 1.1em;
-            line-height: 1.6;
+            font-size: 1.2em;
+            line-height: 1.7;
             color: #444;
             text-align: left;
         }
@@ -139,57 +147,59 @@
         /* Media query para pantallas más pequeñas */
         @media (max-width: 768px) {
             .container {
-                padding: 20px;
+                padding: 30px;
             }
 
             h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
             input[type="number"],
             button {
-                font-size: 1em;
-            }
-
-            #resultado {
                 font-size: 1.1em;
             }
 
+            #resultado {
+                font-size: 1.2em;
+            }
+
             .modal-content {
-                margin: 20% auto;
+                margin: 30% auto;
             }
         }
 
-       /* Estilos para la barra de IMC */
+        /* Estilos para la barra de IMC */
         .imc-bar-container {
             width: 100%;
-            height: 20px;
+            height: 22px;
+            /* Altura ligeramente mayor */
             background-color: #eee;
-            border-radius: 10px;
-            margin-top: 20px;
+            border-radius: 12px;
+            /* Bordes más redondeados */
+            margin-top: 25px;
             overflow: hidden;
             position: relative;
         }
 
         .imc-bar {
             height: 100%;
-            width: 0;
-            /* Inicialmente vacía */
+            width: 100%;
             background: linear-gradient(to right, #fdd835, #90ee90, #90ee90, #ff7043);
-            border-radius: 10px;
+            border-radius: 12px;
             transition: width 0.5s ease-in-out;
             position: relative;
         }
 
-       .imc-bar-pointer {
+        .imc-bar-pointer {
             position: absolute;
-            top: -5px;
+            top: -6px;
+            /* Ajuste de posición */
             width: 0;
             height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 15px solid #333;
-            /* La posición se ajustará con JavaScript */
+            border-left: 11px solid transparent;
+            border-right: 11px solid transparent;
+            border-bottom: 17px solid #333;
+            /* Aumentado el tamaño */
             left: 0;
         }
     </style>
@@ -210,7 +220,7 @@
 
         <div id="resultado"></div>
 
-   <!-- Barra de IMC -->
+        <!-- Barra de IMC -->
         <div class="imc-bar-container">
             <div class="imc-bar" id="imcBar">
                 <div class="imc-bar-pointer" id="imcPointer"></div>
@@ -228,90 +238,119 @@
     </div>
 
     <script>
-        function calcularIMC() {
-            let peso = document.getElementById("peso").value;
-            let altura = document.getElementById("altura").value;
+function calcularIMC() {
+    let peso = document.getElementById("peso").value;
+    let altura = document.getElementById("altura").value;
 
-            if (peso === "" || altura === "") {
-                mostrarResultado("Por favor, introduce peso y altura.", "#e74c3c");
-                return;
-            }
+    if (peso === "" || altura === "") {
+        mostrarResultado("Por favor, introduce peso y altura.", "#e74c3c");
+        return;
+    }
 
-            peso = parseFloat(peso);
-            altura = parseFloat(altura);
+    peso = parseFloat(peso);
+    altura = parseFloat(altura);
 
-            if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
-                mostrarResultado("Por favor, introduce valores numéricos positivos.", "#e74c3c");
-                return;
-            }
+    if (isNaN(peso) || isNaN(altura) || peso <= 0 || altura <= 0) {
+        mostrarResultado("Por favor, introduce valores numéricos positivos.", "#e74c3c");
+        return;
+    }
 
-            let imc = peso / (altura * altura);
-            imc = imc.toFixed(2);
+    let imc = peso / (altura * altura);
+    imc = parseFloat(imc.toFixed(2));
 
-            let interpretacion = "";
-            let consejos = "";
+    let interpretacion = "";
+    let consejos = "";
 
+    if (imc < 18.5) {
+        interpretacion = "Bajo peso";
+        consejos = "Incluye alimentos ricos en nutrientes y consulta a un profesional de la salud para orientación.";
+    } else if (imc < 25) { // Peso normal hasta 24.9
+        interpretacion = "Peso normal";
+        consejos = "Mantén una dieta equilibrada y realiza actividad física regularmente.";
+    } else if (imc < 30) { // Sobrepeso hasta 29.9
+        interpretacion = "Sobrepeso";
+        consejos = "Reduce el consumo de azúcares y grasas, y aumenta la actividad física.";
+    } else {
+        interpretacion = "Obesidad";
+        consejos = "Consulta a un profesional de la salud para un plan personalizado.";
+    }
+
+    let colorResultado = "#27ae60"; // Color por defecto (verde)
+    if (imc < 18.5) {
+        colorResultado = "#fdd835"; // Amarillo
+    } else if (imc < 25) {
+        colorResultado = "#27ae60"; // Verde
+    } else if (imc < 30) {
+        colorResultado = "#ffccbc"; // Rojo claro
+    } else {
+        colorResultado = "#e74c3c"; // Rojo fuerte
+    }
+
+    mostrarResultado(`Tu IMC es <strong>${imc}</strong>: ${interpretacion}`, colorResultado);
+    actualizarBarraIMC(imc);
+    mostrarConsejosModal(consejos);
+
+    function mostrarResultado(mensaje, color) {
+        const resultado = document.getElementById("resultado");
+        resultado.innerHTML = mensaje;
+        resultado.style.color = color;
+    }
+
+    function actualizarBarraIMC(imc) {
+        const bar = document.getElementById("imcBar");
+        const pointer = document.getElementById("imcPointer");
+        const barWidth = bar.offsetWidth;
+
+        let porcentaje = 0;
+
+        if (imc < 15) {
+            porcentaje = 0; // Inicio de la barra
+        } else if (imc > 30) {
+            porcentaje = 100; // Final de la barra
+        } else {
+            // Calcular el porcentaje dentro del rango 18.5 - 30
             if (imc < 18.5) {
-                interpretacion = "Bajo peso";
-                consejos = "Incluye alimentos ricos en nutrientes y consulta a un profesional de la salud.";
-            } else if (imc < 24.9) {
-                interpretacion = "Peso normal";
-                consejos = "¡Buen trabajo! Mantén hábitos saludables y actividad física regular.";
-            } else if (imc < 29.9) {
-                interpretacion = "Sobrepeso";
-                consejos = "Reduce el consumo de azúcares y grasas, y aumenta tu actividad física.";
+                porcentaje = ((imc - 15) / (18.5 - 15)) * 25; // Amarillo (25%)
+            } else if (imc <= 25) {
+                porcentaje = 25 + ((imc - 18.5) / (25 - 18.5)) * 50; // Verde (50%)
             } else {
-                interpretacion = "Obesidad";
-                consejos = "Consulta a un profesional de la salud para un plan personalizado.";
+                porcentaje = 75 + ((imc - 25) / (30 - 25)) * 25; // Rojo (25%)
             }
-
-            mostrarResultado(`Tu IMC es: ${imc} (${interpretacion})`, "#27ae60");
-            mostrarModal(consejos);
-            actualizarBarraIMC(imc);
         }
 
-        function mostrarResultado(mensaje, color) {
-            const resultado = document.getElementById("resultado");
-            resultado.textContent = mensaje;
-            resultado.style.color = color;
-        }
-        function actualizarBarraIMC(imc) {
-            const imcBar = document.getElementById("imcBar");
-            const imcPointer = document.getElementById("imcPointer");
-            const barraAncho = imcBar.offsetWidth;
-        
-            // Rango de IMC y anchos correspondientes a cada categoría
+        porcentaje = Math.max(0, Math.min(100, porcentaje)); // Asegurar que el porcentaje esté entre 0 y 100
+        pointer.style.left = porcentaje + "%";
+    }
 
-            const imcMinimo = 15; // Valor mínimo del IMC que se mostrará
-            const imcMaximo = 40; // Valor máximo del IMC que se mostrará
-        
-            let posicion = ((imc - imcMinimo) / (imcMaximo - imcMinimo)) * barraAncho;
-        
-            // Limitar la posición dentro de la barra
-            posicion = Math.max(0, Math.min(posicion, barraAncho));
-        
-             //Aplica la posición al puntero
-            imcPointer.style.left = posicion + "px";
-        
-            // Aplica el ancho a la barra
-            imcBar.style.width = posicion + "px";
+    function mostrarConsejosModal(consejos) {
+        document.getElementById("consejosTextoModal").innerText = consejos;
+        document.getElementById("consejosModal").style.display = "block";
+    }
 }
-        function mostrarModal(consejos) {
-            document.getElementById("consejosTextoModal").innerText = consejos;
-            document.getElementById("consejosModal").style.display = "block";
-        }
 
+        // función global para cerrar el modal (ahora accesible desde el onclick del botón &times;)
         function cerrarModal() {
             document.getElementById("consejosModal").style.display = "none";
         }
+
+        // cerrar modal al hacer clic fuera del contenido
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById("consejosModal");
+            if (event.target === modal) {
+                cerrarModal();
+            }
+        });
+
+        // cerrar modal al presionar Escape
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                const modal = document.getElementById("consejosModal");
+                if (modal && modal.style.display === "block") {
+                    cerrarModal();
+                }
+            }
+        });
     </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
