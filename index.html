@@ -160,7 +160,7 @@
             }
         }
 
-        /* Estilos para la barra de IMC */
+       /* Estilos para la barra de IMC */
         .imc-bar-container {
             width: 100%;
             height: 20px;
@@ -181,7 +181,7 @@
             position: relative;
         }
 
-        .imc-bar-pointer {
+       .imc-bar-pointer {
             position: absolute;
             top: -5px;
             width: 0;
@@ -210,7 +210,7 @@
 
         <div id="resultado"></div>
 
-        <!-- Barra de IMC -->
+   <!-- Barra de IMC -->
         <div class="imc-bar-container">
             <div class="imc-bar" id="imcBar">
                 <div class="imc-bar-pointer" id="imcPointer"></div>
@@ -251,55 +251,66 @@
             let interpretacion = "";
             let consejos = "";
 
-                        if (imc < 18.5) {
-                            interpretacion = "Bajo peso";
-                            consejos = "Incluye alimentos ricos en nutrientes y consulta a un profesional de la salud.";
-                        } else if (imc < 24.9) {
-                            interpretacion = "Peso normal";
-                            consejos = "¡Buen trabajo! Mantén hábitos saludables y actividad física regular.";
-                        } else if (imc < 29.9) {
-                            interpretacion = "Sobrepeso";
-                            consejos = "Reduce el consumo de azúcares y grasas, y aumenta tu actividad física.";
-                        } else {
-                            interpretacion = "Obesidad";
-                            consejos = "Consulta a un profesional de la salud para un plan personalizado.";
-                        }
-            
-                        mostrarResultado(`Tu IMC es <strong>${imc}</strong> (${interpretacion})`, "#27ae60");
-                        actualizarBarraIMC(imc);
-                        mostrarConsejosModal(consejos);
-                    }
-            
-                    function mostrarResultado(mensaje, color) {
-                        const resultado = document.getElementById("resultado");
-                        resultado.innerHTML = mensaje;
-                        resultado.style.color = color;
-                    }
-            
-                    function actualizarBarraIMC(imc) {
-                        const bar = document.getElementById("imcBar");
-                        const pointer = document.getElementById("imcPointer");
-                        // IMC range: 10 (min) to 40 (max) for visualization
-                        let minIMC = 10;
-                        let maxIMC = 40;
-                        let percent = ((imc - minIMC) / (maxIMC - minIMC)) * 100;
-                        percent = Math.max(0, Math.min(100, percent));
-                        bar.style.width = "100%";
-                        pointer.style.left = `calc(${percent}% - 10px)`;
-                    }
-            
-                    function mostrarConsejosModal(consejos) {
-                        document.getElementById("consejosTextoModal").innerText = consejos;
-                        document.getElementById("consejosModal").style.display = "block";
-                    }
-            
-                    function cerrarModal() {
-                        document.getElementById("consejosModal").style.display = "none";
-                    }
-                </script>
-            </body>
+            if (imc < 18.5) {
+                interpretacion = "Bajo peso";
+                consejos = "Incluye alimentos ricos en nutrientes y consulta a un profesional de la salud.";
+            } else if (imc < 24.9) {
+                interpretacion = "Peso normal";
+                consejos = "¡Buen trabajo! Mantén hábitos saludables y actividad física regular.";
+            } else if (imc < 29.9) {
+                interpretacion = "Sobrepeso";
+                consejos = "Reduce el consumo de azúcares y grasas, y aumenta tu actividad física.";
+            } else {
+                interpretacion = "Obesidad";
+                consejos = "Consulta a un profesional de la salud para un plan personalizado.";
+            }
 
-            </html>
+            mostrarResultado(`Tu IMC es: ${imc} (${interpretacion})`, "#27ae60");
+            mostrarModal(consejos);
+            actualizarBarraIMC(imc);
+        }
+
+        function mostrarResultado(mensaje, color) {
+            const resultado = document.getElementById("resultado");
+            resultado.innerHTML = mensaje;
+            resultado.style.color = color;
+        }
+
+        function actualizarBarraIMC(imc) {
+            const imcBar = document.getElementById("imcBar");
+            const imcPointer = document.getElementById("imcPointer");
+            const barraAncho = imcBar.offsetWidth;
+
+            // Rango de IMC considerado (ajusta según tus necesidades)
+            const imcMinimo = 15;
+            const imcMaximo = 40;
+
+            // Calcula la posición del puntero en función del IMC
+            let posicion = ((imc - imcMinimo) / (imcMaximo - imcMinimo)) * barraAncho;
+
+            // Limita la posición dentro de la barra
+            posicion = Math.max(0, Math.min(posicion, barraAncho));
+
+            // Aplica la posición al puntero
+            imcPointer.style.left = posicion + "px";
+
+            // Aplica el ancho a la barra
+            imcBar.style.width = posicion + "px";
+        }
+
+        function mostrarModal(consejos) {
+            document.getElementById("consejosTextoModal").innerText = consejos;
+            document.getElementById("consejosModal").style.display = "block";
+        }
+
+        function cerrarModal() {
+            document.getElementById("consejosModal").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
+
 
 
 
