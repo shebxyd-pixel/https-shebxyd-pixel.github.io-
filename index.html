@@ -32,6 +32,8 @@
             width: 100%;
             max-width: 650px;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
 
         h1 {
@@ -91,6 +93,49 @@
             color: #27ae60;
         }
 
+        /* Botón externo en esquina superior derecha */
+        .external-link {
+            position: fixed;
+            top: 0px;
+            right: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 30;
+            text-align: center;
+        }
+
+        .external-label {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(255,255,255,0.03));
+            text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+            backdrop-filter: blur(4px);
+        }
+
+        .external-button {
+            background: linear-gradient(135deg, #8e54e9, #3498db);
+            color: #fff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            box-shadow: 0 8px 18px rgba(50,50,93,0.18);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+        }
+
+        .external-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(50,50,93,0.24);
+            opacity: 0.98;
+        }
+
         /* Estilos para la ventana modal */
         .modal {
             display: none;
@@ -143,22 +188,22 @@
             color: #444;
             text-align: left;
         }
-                          .container { position: relative; }
-                  .logo {
-                      position: absolute;
-                      top: 18px;
-                      right: 18px;
-                      width: 64px;
-                      height: 64px;
-                      z-index: 10;
-                  }
-                  .logo img {
-                      width: 100%;
-                      height: 100%;
-                      object-fit: contain;
-                      display: block;
-                  }
 
+        .container { position: relative; }
+        .logo {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 64px;
+            height: 64px;
+            z-index: 10;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
 
         /* Media query para pantallas más pequeñas */
         @media (max-width: 768px) {
@@ -181,6 +226,15 @@
 
             .modal-content {
                 margin: 30% auto;
+            }
+
+            .external-link {
+                top: 12px;
+                right: 12px;
+            }
+
+            .logo {
+                top: 88px; /* evitar superposición en pantallas pequeñas */
             }
         }
 
@@ -222,6 +276,11 @@
 </head>
 
 <body>
+
+    <!-- Botón en la esquina superior derecha (fuera de la calculadora) -->
+    <div class="external-link" aria-hidden="false">
+        <button class="external-button" onclick="window.location.href='URL_DE_LA_PAGINA'" aria-label="Ir a otra página">Proyecto Transversal</button>
+    </div>
 
     <div class="container">
         <div class="logo"><img src="cobaem-87887.png" alt="Logo"></div>
