@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="/images/favicon.png" type="imgs/$Dev_Kofu.png">
+    <link rel="icon" href="imgs/$Dev_Kofu.png" type="imgs/$Dev_Kofu.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio $Dev_Kofu </title>
     <style>
@@ -77,7 +77,6 @@
             to { box-shadow: 0 0 15px rgba(155, 93, 229, 0.8); }
         }
 
-        /* --- INTERACCIÓN DE EMOJIS (Clase para JS) --- */
         .emoji-animado {
             display: inline-block;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -87,7 +86,6 @@
             transform: scale(1.4) rotate(15deg);
         }
 
-        /* --- LOS 3 RECUADROS DEL INICIO (Efecto Flotante Continuo) --- */
         .grid-inicio {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -104,11 +102,9 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             
-            /* Animación de flotación infinita para cuando se está mirando */
             animation: flotarEfecto 4s ease-in-out infinite;
         }
 
-        /* Desfasamos los tiempos de animación de cada recuadro para que no floten todos rígidos al mismo tiempo */
         .grid-inicio .recuadro:nth-child(1) { animation-delay: 0s; }
         .grid-inicio .recuadro:nth-child(2) { animation-delay: 0.5s; }
         .grid-inicio .recuadro:nth-child(3) { animation-delay: 1s; }
@@ -119,17 +115,15 @@
             100% { transform: translateY(0px); }
         }
 
-        /* En computadora, cuando el mouse pasa por encima (hover), reacciona de forma más brusca */
         @media (min-width: 769px) {
             .recuadro:hover {
                 transform: translateY(-12px) scale(1.03) !important;
                 border-color: var(--morado-claro);
                 box-shadow: 0 10px 20px rgba(155, 93, 229, 0.2);
-                animation-play-state: paused; /* Pausa la flotación suave al interactuar */
-            }
+                animation-play-state: paused; 
+                        }
         }
 
-        /* --- SECCIÓN DE EXPLICACIÓN DETALLADA --- */
         .seccion-detalles h2 {
             font-size: 1.5rem;
             color: var(--morado-claro);
@@ -186,7 +180,6 @@
             color: var(--texto-gris);
         }
 
-        /* --- RECUADRO PARA VENTA DE ARCHIVOS (Texto sin formatear) --- */
         .titulo-ventas {
             font-size: 1rem;
             color: var(--texto-gris);
@@ -211,9 +204,6 @@
             border-style: solid;
         }
 
-        /* ========================================================
-           📱 MEDIA QUERIES: ADAPTACIÓN PARA TELÉFONOS
-           ======================================================== */
         @media (max-width: 768px) {
             body {
                 padding: 20px 12px;
@@ -225,7 +215,7 @@
 
             .grid-inicio {
                 grid-template-columns: 1fr;
-                gap: 16px; /* Aumentamos el espacio para que se note el efecto flotar entre tarjetas */
+                gap: 16px;
             }
 
             .bloque-proyecto {
@@ -240,21 +230,26 @@
         
         <header>
             <h1>Mi Portafolio<span>.</span></h1>
-            <p class="presentacion">
-                ¡Hola! <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">👋</span> Soy un chico de 17 años y este es mi espacio provisional de presentación para destacar mis archivos y desarrollos actuales.
-            </p>
             <span class="edad-badge">17 Años // Desarrollador</span>
         </header>
 
         <section class="grid-inicio">
-            <div class="recuadro">
-                <div style="font-size: 1.5rem;"><span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🎮</span></div>
-                <h3>55shG4M</h3>
+            <div class="recuadro" id="55shG4M">
+                <a href="https://github.com/shebxyd-pixel/55shG4M-" target="_blank">
+                    <div style="font-size: 1.5rem;">
+                        <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🎮</span>
+                    </div>
+                    <h3>55shG4M</h3>
+                </a>
                 <span class="categoria">Juego en C++</span>
             </div>
-            <div class="recuadro">
-                <div style="font-size: 1.5rem;"><span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🤖</span></div>
-                <h3>Proyecto_Kofu</h3>
+            <div class="recuadro" id="Proyecto_Kofu">
+                <a href="https://github.com/shebxyd-pixel/Proyecto_Kofu" target="_blank">
+                    <div style="font-size: 1.5rem;">
+                        <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🤖</span>
+                    </div>
+                    <h3>Proyecto_Kofu</h3>
+                </a>
                 <span class="categoria">IA en Python</span>
             </div>
             <div class="recuadro">
@@ -289,12 +284,9 @@
     </div>
 
     <script>
-        // Función sencilla para hacer reaccionar los emojis al pasar el mouse o tocarlos
         function animarEmoji(elemento) {
-            // Añadimos la clase de animación
             elemento.classList.add('salto');
             
-            // Se la quitamos después de 300ms para que se pueda volver a activar
             setTimeout(() => {
                 elemento.classList.remove('salto');
             }, 300);
@@ -303,3 +295,4 @@
 
 </body>
 </html>
+
