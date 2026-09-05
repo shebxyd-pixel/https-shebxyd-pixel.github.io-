@@ -2,298 +2,741 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="imgs/$Dev_Kofu.png" type="imgs/$Dev_Kofu.png">
+    <link rel="icon" href="imgs/$Dev_Kofu.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio/$'Dev_Kofu'</title>
+    <title>Dev_Kofu | Software Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --fondo-oscuro: #0a090d;
-            --tarjeta-bg: #14121a;
-            --morado-claro: #9b5de5;
-            --morado-oscuro: #5a189a;
-            --texto-blanco: #ffffff;
-            --texto-gris: #a09cb0;
+            --bg-color: #0a0a0e;
+            --surface: #13141c;
+            --surface-hover: #1e202d;
+            --primary: #9b5de5;
+            --secondary: #00f3ff;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #26293d;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--fondo-oscuro);
-            color: var(--texto-blanco);
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 40px 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.7;
             overflow-x: hidden;
-            animation: entradaSuave 0.8s ease-out;
+        }
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            pointer-events: none;
         }
 
-        @keyframes entradaSuave {
-            from { opacity: 0; transform: translateY(20px); }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 14, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--border);
+            margin-left: 20px;
+        }
+        
+        .section-title span { color: var(--primary); margin-right: 10px; }
+        #inicio {
+            padding-top: 150px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-mono);
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--text-main), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .terminal-container {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 40px;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .term-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .dot-r { background: #ff5f56; }
+        .dot-y { background: #ffbd2e; }
+        .dot-g { background: #27c93f; }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: #a3be8c;
+        }
+        
+        .typewriter-text {
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .projects-container {
+            width: 100%;
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--secondary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .contenedor {
-            max-width: 900px;
-            margin: 0 auto;
+        .project-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
         }
 
-        header {
+        .project-img-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #1e1e24;
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .project-img-placeholder:hover {
+            border-color: var(--secondary);
+        }
+
+        .project-img-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #221c2e;
-            padding-bottom: 20px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
+        .project-info h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
         }
 
-        header h1 span {
-            color: var(--morado-claro);
+        .project-desc {
+            background: #0f1115;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            border-left: 4px solid var(--primary);
         }
 
-        .presentacion {
-            font-size: 1.1rem;
-            color: var(--texto-gris);
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tech-stack span {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--secondary);
+            background: rgba(0, 243, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .project-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .project-links a:hover {
+            color: var(--primary);
+        }
+        .contact-box {
+            text-align: center;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .edad-badge {
-            display: inline-block;
-            background-color: var(--morado-oscuro);
-            border: 1px solid var(--morado-claro);
-            color: white;
-            padding: 4px 12px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-top: 15px;
-            animation: pulsoGlow 2s infinite alternate;
+        .contact-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
-        @keyframes pulsoGlow {
-            from { box-shadow: 0 0 5px rgba(155, 93, 229, 0.4); }
-            to { box-shadow: 0 0 15px rgba(155, 93, 229, 0.8); }
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
         }
 
-        .emoji-animado {
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-        .emoji-animado.salto {
-            transform: scale(1.4) rotate(15deg);
-        }
-
-        .grid-inicio {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 50px;
-        }
-
-        .recuadro {
-            background-color: var(--tarjeta-bg);
-            border: 1px solid #221c2e;
-            border-top: 4px solid var(--morado-claro);
-            padding: 20px;
-            border-radius: 8px;
+        footer {
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            
-            animation: flotarEfecto 4s ease-in-out infinite;
+            padding: 30px;
+            border-top: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
         }
 
-        .grid-inicio .recuadro:nth-child(1) { animation-delay: 0s; }
-        .grid-inicio .recuadro:nth-child(2) { animation-delay: 0.5s; }
-        .grid-inicio .recuadro:nth-child(3) { animation-delay: 1s; }
-
-        @keyframes flotarEfecto {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @media (min-width: 769px) {
-            .recuadro:hover {
-                transform: translateY(-12px) scale(1.03) !important;
-                border-color: var(--morado-claro);
-                box-shadow: 0 10px 20px rgba(155, 93, 229, 0.2);
-                animation-play-state: paused; 
-                        }
-        }
-
-        .seccion-detalles h2 {
-            font-size: 1.5rem;
-            color: var(--morado-claro);
-            margin-bottom: 20px;
-            border-left: 4px solid var(--morado-oscuro);
-            padding-left: 10px;
-        }
-
-        .bloque-proyecto {
-            background-color: var(--tarjeta-bg);
-            border: 1px solid #221c2e;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        @media (min-width: 769px) {
-            .bloque-proyecto:hover {
-                transform: translateX(8px);
-                border-color: var(--morado-claro);
-            }
-        }
-
-        .bloque-proyecto h3 {
-            margin: 0 0 6px 0;
-            font-size: 1.4rem;
-        }
-
-        .datos-rapidos {
-            font-size: 0.85rem;
-            color: var(--texto-gris);
-            margin-bottom: 12px;
-        }
-
-        .datos-rapidos span {
-            color: var(--texto-blanco);
-            background-color: #221c38;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .bloque-proyecto p {
-            margin: 0 0 12px 0;
-            color: #e0dbec;
-        }
-
-        .nota {
-            background-color: #000000;
-            padding: 10px 14px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: var(--texto-gris);
-        }
-
-        .titulo-ventas {
-            font-size: 1rem;
-            color: var(--texto-gris);
-            margin-top: 40px;
-            margin-bottom: 8px;
-        }
-
-        .recuadro-plano {
-            background-color: #000000;
-            border: 1px dashed var(--morado-oscuro);
-            padding: 16px;
-            border-radius: 6px;
-            font-family: monospace;
-            color: var(--morado-claro);
-            white-space: pre-wrap;
-            word-break: break-all;
-            font-size: 1rem;
-            transition: border-style 0.3s;
-        }
-        
-        .recuadro-plano:hover {
-            border-style: solid;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 20px 12px;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .grid-inicio {
+            .project-layout {
                 grid-template-columns: 1fr;
-                gap: 16px;
             }
-
-            .bloque-proyecto {
-                padding: 16px;
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            section {
+                padding: 60px 0;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="contenedor">
-        
-        <header>
-            <h1><span>$'Dev_Kofu'</span></h1>
-            <span class="edad-badge">17 Años // Desarrollador</span>
-        </header>
+    <div class="bg-grid"></div>
 
-        <section class="grid-inicio">
-            <div class="recuadro" id="55shG4M">
-                <a href="https://github.com/shebxyd-pixel/55shG4M-" target="_blank">
-                    <div style="font-size: 1.5rem;">
-                        <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🎮</span>
-                    </div>
-                    <h3>55shG4M</h3>
-                </a>
-                <span class="categoria">Juego en C++</span>
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">Dev_<span>Kofu</span></a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="inicio" class="reveal">
+            <p class="hero-subtitle">Hola, mi nombre es</p>
+            <h1 class="hero-title">Dev_Kofu.</h1>
+            <h2 class="hero-title" style="color: var(--text-muted);">Construyo agentes de Inteligencia Artificial.</h2>
+            <p class="hero-desc">
+                Soy un desarrollador de software de 17 años especializado en la creación de Agentes de Inteligencia Artificial, usando modelos de ollama y arquitectura llama.cpp. Actualmente, estoy enfocado en construir Agentes ligeros y centrados en la eficiencia y experiencia del usuario.
+            </p>
+            <div>
+                <a href="#proyectos" class="btn">Ver mis proyectos</a>
             </div>
-            <div class="recuadro" id="Proyecto_Kofu">
-            <a href="https://github.com/shebxyd-pixel/Proyecto_Kofu" target="_blank">
-            <div style="font-size: 1.5rem;">
-                <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">🤖</span>
-                    </div>
-                    <h3>Proyecto_Kofu</h3>
-                </a>
-                <span class="categoria">IA en Python</span>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="term-dot dot-r"></div>
+                    <div class="term-dot dot-y"></div>
+                    <div class="term-dot dot-g"></div>
+                </div>
+                <div class="terminal-body">
+                    <span style="color: #61afef;">kofu</span><span style="color: var(--text-muted);"> @ </span><span style="color: #e06c75;">portafolio</span><span style="color: var(--text-main);">:~$</span>
+                    <span id="typewriter" class="typewriter-text"></span>
+                </div>
             </div>
-            <div class="recuadro">
-            <a href="https://shebxyd-pixel.github.io/" target="_blank"></a>
-                <div style="font-size: 1.5rem;"><span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">💼</span></div>
-                <h3>Archivos Digitales</h3>
-                <span class="categoria">Venta / Enlace</span>
+        </section>
+        <section id="sobre-mi" class="reveal">
+            <h2 class="section-title"><span>01.</span> Sobre Mí</h2>
+            <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 40px;">
+                <div>
+                    <p style="color: var(--text-muted); margin-bottom: 15px;">
+                        Hola, soy shebxyd-pixel, un apasionado por la programación y la Inteligencia Artificial. Mi interés por la creación de Agentes de Inteligencia Artificial nació cuando descubrí cómo automatizar tareas usando modelos de Ollama.
+                    </p>
+                    <p style="color: var(--text-muted); margin-bottom: 15px;">
+                        Tengo 17 años y mi enfoque principal es la creación de agentes de Inteligencia Artificial para automatizar diversas tareas de forma más sencilla.
+                    </p>
+                    <p style="color: var(--text-muted);">
+                        Estos son algunos de los lenguajes con los que he estado trabajando recientemente y con los que estoy familiarizado:
+                    </p>
+                    <ul style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-muted);">
+                        <li><span style="color: var(--primary);">▹</span> Python</li>
+                        <li><span style="color: var(--primary);">▹</span> PyInstaller</li>
+                        <li><span style="color: var(--primary);">▹</span> Ollama</li>
+                        <li><span style="color: var(--primary);">▹</span> C++</li>
+                        <li><span style="color: var(--primary);">▹</span> HTML, CSS & JS</li>
+                        <li><span style="color: var(--primary);">▹</span> Kotlin</li>
+                    </ul>
+                </div>
+                <div class="project-img-placeholder" style="height: auto; aspect-ratio: 1; border-radius: 50%; padding: 0; border: none;">
+                    <img src="imgs/shebxyd-pixel.png" alt="Perfil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
             </div>
         </section>
 
-        <main class="seccion-detalles">
-            <h2>Detalles de mis Proyectos <span class="emoji-animado" onmouseover="animarEmoji(this)" onclick="animarEmoji(this)">📂</span></h2>
+        <section id="proyectos" class="reveal">
+            <h2 class="section-title"><span>02.</span> Algunos de mis proyectos</h2>
+            
+            <div class="projects-container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" onclick="openTab(event, 'proj-kofu')">Proyecto_Kofu</button>
+                    <button class="tab-btn" onclick="openTab(event, 'proj-Hino')">Proyecto_Hino</button>
+                    <button class="tab-btn" onclick="openTab(event, 'proj-Nara')">Proyecto_Nara</button>
+                    <button class="tab-btn" onclick="openTab(event, 'proj-55sh')">55shG4M_CPP</button>
+                    <button class="tab-btn" onclick="openTab(event, 'proj-Kroma')">Proyecto_Kroma</button>
+                    <button class="tab-btn" onclick="openTab(event, 'proj-Kiru')">Proyecto_Kiru</button>
+                </div>
+                <div id="proj-kofu" class="tab-content active">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/Kofu.png" alt="Proyecto Kofu" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">Proyecto Destacado</h3>
+                            <h3>Proyecto_Kofu</h3>
+                            <div class="project-desc">
+                                Una Inteligencia Artificial local diseñada para crear archivos directamente en tu computadora sin necesidad de conectarse a internet. Este proyecto utiliza el motor de Ollama (gemma4) y está enfocado al ámbito profesional, actualmente en fase de producción y desarrollo beta.
+                            </div>
+                            <div class="tech-stack">
+                                <span>Python</span>
+                                <span>Ollama</span>
+                                <span>Gemma4</span>
+                                <span>IA Local</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/shebxyd-pixel/Proyecto_Kofu" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" title="Demo / Enlace"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="bloque-proyecto">
-                <h3>Repositorio: 55shG4M</h3>
-                <div class="datos-rapidos">Lenguaje principal: <span>C++</span> | Estado: <span>Código Público</span></div>
-                <p>Es un juego escrito en C++ que actualmente no tiene un nombre definitivo. El código está disponible para que cualquiera lo vea, pero toma en cuenta que por el momento no incluye documentación sobre cómo funciona internamente.</p>
-                <div class="nota">// Nota: Código libre sin instrucciones de uso en el repositorio.</div>
+                <div id="proj-Hino" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/Hino.png" alt="Hino" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">Bifurcación de Kofu</h3>
+                            <h3>Proyecto_Hino</h3>
+                            <div class="project-desc">
+                                Un Agente de IA especializado en generar documentos y es la bifurcación de Kofu con menos módulos siendo un Agente Experimental. Su principal característica es que no cuenta con módulos de filtrado ni de seguridad y la forma en la que sirve los puertos es más optimizada para correr en computadoras menos potentes y dejar espacio para los cerebros.
+                            </div>
+                            <div class="tech-stack">
+                                <span>Python</span>
+                                <span>Office</span>
+                                <span>Ollama</span>                                 
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/shebxyd-pixel/Proyecto_Kofu/tree/LarIA-(Beta)" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="proj-Nara" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/shebxyd-pixel.png" alt="Proyecto Nara" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">IA Portátil</h3>
+                            <h3>Proyecto_Nara</h3>
+                            <div class="project-desc">
+                                Un Agente de Inteligencia Artificial escrito en Kotlin que usa la arquitectura llama.cpp para correr modelos de forma local usando archivos .GGUF sin necesidad de servidores ni suscripciones. Tiene habilidades de hacer llamadas a funciones del sistema usando etiquetas Regex.
+                            </div>
+                            <div class="tech-stack">
+                                <span>Kotlin</span>
+                                <span>Java</span>
+                                <span>Llama.cpp</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/shebxyd-pixel/Kofu_Mobile" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="proj-55sh" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/shebxyd-pixel.png" alt="Proyecto" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">Juego Independiente</h3>
+                            <h3>55shG4M</h3>
+                            <div class="project-desc">
+                                Un juego desarrollado íntegramente en C++. El proyecto está en constante evolución y su código fuente es completamente abierto para estudio. Es un excelente ejemplo de manejo de memoria y lógica de videojuegos desde cero sin motores gráficos pesados.
+                            </div>
+                            <div class="tech-stack">
+                                <span>C++</span>
+                                <span>Game Development</span>
+                                <span>Open Source</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/shebxyd-pixel/55shG4M-" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="proj-archivos" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/shebxyd-pixel.png" alt="Archivos" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">IA Móvil</h3>
+                            <h3>Proyecto_Nara</h3>
+                            <div class="project-desc">
+                                Una IA local que corre de forma 100% offline usando la arquitectura de llama.cpp con capacidades de ejecución y con habilidades de control de dispositivos usando corrutinas y etiquetas regex.
+                            </div>
+                            <div class="tech-stack">
+                                <span>llama.cpp</span>
+                                <span>GGUF</span>
+                                <span>Kotlin</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://shebxyd-pixel.github.io/" target="_blank" rel="noopener noreferrer" title="Visitar Sitio"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="proj-Kroma" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/shebxyd-pixel.png" alt="Proyecto Kroma" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">Suite Automatizada de edición</h3>
+                            <h3>Proyecto_Kroma</h3>
+                            <div class="project-desc">
+                                Una suite con herramientas de edición de fotos y videos impulsada por FFmpeg y modelos vision para elegir clips y fotos. Está conformada por 3 Agentes: Riku, Miro y Kroma.
+                            </div>
+                            <div class="tech-stack">
+                                <span>Python</span>
+                                <span>ffmpeg</span>
+                                <span>Ollama</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/shebxyd-pixel/Project_Kroma" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" title="Visitar Sitio"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="proj-Kiru" class="tab-content">
+                    <div class="project-layout">
+                        <div class="project-img-placeholder" style="border: none; padding: 0;">
+                            <img src="imgs/Kiru.png" alt="Proyecto Kiru" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="hero-subtitle">Agente de Pentesting</h3>
+                            <h3>Proyecto_Kiru</h3>
+                            <div class="project-desc">
+                                Un prototipo de Agente optimizado para pruebas de pentesting usando un cerebro de 4b sin censura conectado a bases de datos públicas de vulnerabilidades como 'PayloadAllThings' y con una interfaz de sandbox con acceso a la terminal usando un script intermediario de Python.
+                            </div>
+                            <div class="tech-stack">
+                                <span>Ollama</span>
+                                <span>Python</span>
+                                <span>Bash</span>
+                            </div>
+                                <b>[Debido a la naturaleza caótica del proyecto no está en GitHub y aún es experimental]</b>
+                            <div class="project-links">
+                                <a href="https://drive.google.com/drive/folders/1qLJFFd-neOVMQcY96NDx9w6utbANCbvM?usp=sharing" target="_blank" rel="noopener noreferrer" title="Ver Código"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" title="Visitar Sitio"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="bloque-proyecto">
-                <h3>Repositorio: Proyecto_Kofu</h3>
-                <div class="datos-rapidos">Lenguaje principal: <span>Python</span> | Base: <span>Ollama (gemma4)</span></div>
-                <p>Este es un proyecto más enfocado al ámbito profesional. Se encuentra en fase de producción y desarrollo beta. Es una Inteligencia Artificial local llamada Kofu, diseñada para crear archivos directamente en tu computadora sin necesidad de conectarse a internet, usando el motor de Ollama.</p>
+        </section>
+        <section id="contacto" class="reveal">
+            <div class="contact-box">
+                <p class="hero-subtitle">Contacto</p>
+                <h2>Ponte en contacto</h2>
+                <p>
+                Actualmente estoy buscando nuevas oportunidades y mi bandeja de entrada siempre está abierta. Ya sea que tengas una propuesta de proyecto o una pregunta, haré todo lo posible para responderte!
+                </p>
+                <a href="https://t.me/p9aw_fehxe" target="_blank" rel="noopener noreferrer" class="btn">Telegram</a>
             </div>
+        </section>
 
-            <!-- <a href="https://shebxyd-pixel.github.io/Kofu_Premium.html" target="_blank">
-                <div class="titulo-ventas">Tambien vendo Trabajos Digitales</div>
-                <div class="recuadro-plano">https://github.com/shebxyd-pixel.github.io</div> -->
-            </section>
-        </main>
+    </main>
 
-    </div>
+    <footer>
+        <p>Diseñado y Construido por Dev_Kofu</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">
+            <a href="https://github.com/shebxyd-pixel" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: none;"><i class="fa-brands fa-github"></i> GitHub</a>
+        </p>
+    </footer>
 
     <script>
-        function animarEmoji(elemento) {
-            elemento.classList.add('salto');
-            
-            setTimeout(() => {
-                elemento.classList.remove('salto');
-            }, 300);
-        }
-    </script>
+        function openTab(evt, tabId) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            const tabBtns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
 
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        const words = ['ollama', 'llama.cpp', 'python', 'html', 'css', 'js', 'web'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById("typewriter");
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typewriterEl.innerHTML = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.innerHTML = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 150;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+        setTimeout(typeWriter, 1000);
+
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', revealOnScroll);
+    </script>
 </body>
 </html>
-
